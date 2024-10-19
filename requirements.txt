@@ -5,4 +5,5 @@ boto3
 pydeck
 streamlit-option-menu
 pytz
+nysdotapi
 requests
