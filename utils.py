@@ -7,7 +7,7 @@ import boto3
 import csv
 from PIL import Image
 import streamlit as st
-from traffic import API
+from traffic import api
 
 
 bucket_name = "capstone-mids-datasets"
