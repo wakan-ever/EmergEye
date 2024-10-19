@@ -7,16 +7,7 @@ import boto3
 import csv
 from PIL import Image
 import streamlit as st
-
-import importlib
-traffic = importlib.import_module('traffic')
-API = getattr(traffic, 'API', None)
-if API is None:
-    raise ImportError("API class not found in the 'traffic' module")
-
-
-
-
+from traffic import API
 
 bucket_name = "capstone-mids-datasets"
 bucket_buffer_directory = "capstone-inference/buffer/"
