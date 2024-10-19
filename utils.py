@@ -8,11 +8,12 @@ import csv
 from PIL import Image
 import streamlit as st
 
-import traffic
-
+import importlib
+traffic = importlib.import_module('traffic')
 API = getattr(traffic, 'API', None)
 if API is None:
     raise ImportError("API class not found in the 'traffic' module")
+
 
 
 
