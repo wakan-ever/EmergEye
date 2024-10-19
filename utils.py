@@ -7,7 +7,13 @@ import boto3
 import csv
 from PIL import Image
 import streamlit as st
-from traffic.api import API
+
+import traffic
+
+API = getattr(traffic, 'API', None)
+if API is None:
+    raise ImportError("API class not found in the 'traffic' module")
+
 
 
 
