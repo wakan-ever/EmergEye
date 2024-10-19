@@ -1,0 +1,9 @@
+streamlit
+opencv-python-headless
+Pillow
+boto3
+pydeck
+streamlit-option-menu
+pytz
+traffic
+requests
