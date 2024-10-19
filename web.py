@@ -108,7 +108,7 @@ elif selected == "Contact Us":
 # MVP Page
 elif selected == "MVP":
     # st.title("MVP")
-    st.image("logo.png", width=200)
+    st.image("Logo.png", width=200)
     
     # Check if the NYSDOT API Key is available before proceeding
     if 'nysdot_api_key' in st.session_state['api_keys'] and st.session_state['api_keys']['nysdot_api_key']:
