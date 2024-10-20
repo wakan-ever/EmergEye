@@ -144,6 +144,13 @@ elif selected == "MVP":
             </style>
         """, unsafe_allow_html=True)
         
+        # Ensure session state is initialized for analysis and notification flag
+        if 'analysis_complete' not in st.session_state:
+            st.session_state['analysis_complete'] = False
+        
+        if 'notification_ready' not in st.session_state:
+            st.session_state['notification_ready'] = False
+
         # Create a container for the entire UI
         with st.container():
             
