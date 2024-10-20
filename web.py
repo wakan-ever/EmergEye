@@ -1,14 +1,20 @@
 import streamlit as st
-from utils import StreamProcess
 from streamlit_option_menu import option_menu
 import pydeck as pdk
+
+import video_input_module  # Importing video input module
+import model_module        # Importing model module
+import accident_report_module  # Importing accident report module
+
+# Enable wide mode for full-screen layout
+st.set_page_config(layout="wide")
 
 # Use the option menu for sidebar navigation with icons
 with st.sidebar:
     selected = option_menu(
         "",
-        ["Home", "About", "MVP", "API Keys", "Contact Us"],
-        icons=["house", "briefcase", "rocket", "key", "envelope"],
+        ["Home", "About",  "API Keys", "MVP", "Contact Us"],
+        icons=["house", "briefcase", "key", "rocket",  "envelope"],
         menu_icon="cast",
         default_index=0,
         styles={
@@ -84,7 +90,7 @@ elif selected == "API Keys":
 
     # Create input fields for various API keys
     nysdot_api_key = st.text_input("NYSDOT API Key", type="password")
-    llm_api_key = st.text_input("LLM API Key", type="password")
+    llm_api_key = st.text_input("LLM API Key (no need for demo)", type="password")
     
     # Store API keys in session state upon submission
     if st.button("Submit API Keys"):
@@ -108,90 +114,61 @@ elif selected == "Contact Us":
 # MVP Page
 elif selected == "MVP":
     # st.title("MVP")
-    st.image("Logo.png", width=200)
-    
-    # Check if the NYSDOT API Key is available before proceeding
-    if 'nysdot_api_key' in st.session_state['api_keys'] and st.session_state['api_keys']['nysdot_api_key']:
-        # Use the stored API key to initialize StreamProcess
-        stream_process = StreamProcess(api_key=st.session_state['api_keys']['nysdot_api_key'])
 
-    # Initialize session state variables
-    if 'available_cameras' not in st.session_state:
-        st.session_state['available_cameras'] = []
-    if 'selected_camera' not in st.session_state:
-        st.session_state['selected_camera'] = None
-    
-    # Dropdown for selecting Department of Transportation (DoT)
-    st.title("DoT Camera Selection")
-    dot_city = st.selectbox(
-        "Select DoT State:", 
-        ["", "New York State DoT"],  # Currently, only New York State DoT is available
-        index=0
-    )
-    
-    # Ensure the user has selected a valid option before proceeding
-    if dot_city:
-        # Input for road name to search for cameras
-        road_name = st.text_input("Enter Area to Search for Cameras:")
-    
-        # Search and display available cameras when the button is pressed
-        if st.button("Search Cameras"):
-            st.session_state['available_cameras'] = stream_process.search_camera_by_road(road_name)
-    
-        if st.session_state['available_cameras']:
-            # Dropdown to select a camera from the available options
-            camera_options = {f"{cam.__dict__['name']} (ID: {cam.__dict__['id']})": idx for idx, cam in enumerate(st.session_state['available_cameras'])}
-            selected_camera_option = st.selectbox("Select a Camera", list(camera_options.keys()))
-    
-            # Retrieve the selected camera
-            st.session_state['selected_camera'] = st.session_state['available_cameras'][camera_options[selected_camera_option]]
-    
-            # Set the selected camera in the StreamProcess object
-            stream_process.selected_camera = st.session_state['selected_camera']
-    
-            # Display details of the selected camera
-            selected_camera = st.session_state['selected_camera']
-            st.subheader("Selected Camera Details")
-            st.write(f"**Camera ID:** {selected_camera.__dict__['id']}")
-            st.write(f"**Name:** {selected_camera.__dict__['name']}")
-            st.write(f"**Roadway:** {selected_camera.__dict__.get('roadway', 'Unknown')}")
-            st.write(f"**Direction:** {selected_camera.__dict__.get('direction', 'Unknown')}")
-            st.write(f"**Latitude:** {selected_camera.__dict__['latitude']}")
-            st.write(f"**Longitude:** {selected_camera.__dict__['longitude']}")
-            # st.write(f"**Image URL:** {selected_camera.__dict__['image_url']}")
-    
-            # Placeholder for live camera image
-            image_placeholder = st.empty()
-    
-            # Display the image from the Image URL
-            image_placeholder.image(selected_camera.__dict__['image_url'], caption="Live Camera Image")
+    # Add tabs navigation for MVP
+    tabs = st.tabs(["💼 How it works", "🚀 MVP Demo"])
+
+    with tabs[0]:
+        st.header("MVP Diagram")
+        st.write("This section will allow you to explore how our product works.")
+        st.image("diagram.png")
+
+    with tabs[1]:   
+        # st.image("logo.png", width=200)
+        
+        # Custom CSS for borders
+        st.markdown("""
+            <style>
+            .module-container {
+                border: 2px solid #f0f0f5;
+                padding: 15px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                background-color: #fafafa;
+            }
+            .module-title {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+        
+        # Create a container for the entire UI
+        with st.container():
             
-            # Button to preview the live stream
-            if st.button("Preview Live Stream"):
-                # Clear the live camera image
-                image_placeholder.empty()
-    
-                # Preview live stream
-                preview_result = stream_process.preview_live_stream()
-                st.write(preview_result)
-                # Show a greenish success message
-                # st.success("Video preview complete.")
-    
-            # Button to list associated signs (if any)
-            if st.button("List Associated Signs"):
-                signs_info = stream_process.list_associated_signs()
-                st.write(signs_info)
-    
-            # Button to start video stream and save the video
-            if st.button("Start Video Stream and Save"):
-                recording_info = stream_process.save_video_from_stream(duration_seconds=20)
-                st.write(recording_info)
-                st.success("Frames extracted and Metadata saved")
-    else:
-        st.warning("Please submit the NYSDOT API Key first in the 'API Keys' section.")
-
-
-
-
-
-
+            # Create two columns: one for the left (video input and model) and one for the right (accident report)
+            col_left, col_right = st.columns([2, 1])  # Adjust ratio as needed
+        
+            # Left Column: Video Input and Model Module
+            with col_left:
+                # Top section: Video Input Module
+                with st.container():
+                    st.markdown('<div class="module-container">', unsafe_allow_html=True)
+                    st.markdown('<div class="module-title">Live Stream Input</div>', unsafe_allow_html=True)
+                    video_input_module.display_video_input()  # Call the video input module
+                    st.markdown('</div>', unsafe_allow_html=True)
+        
+                # Bottom section: Model Module
+                with st.container():
+                    st.markdown('<div class="module-container">', unsafe_allow_html=True)
+                    st.markdown('<div class="module-title">Accident Detection</div>', unsafe_allow_html=True)
+                    model_module.display_model_analysis()  # Call the model analysis module
+                    st.markdown('</div>', unsafe_allow_html=True)
+        
+            # Right Column: Accident Report Module
+            with col_right:
+                st.markdown('<div class="module-container">', unsafe_allow_html=True)
+                st.markdown('<div class="module-title">Accident Notification</div>', unsafe_allow_html=True)
+                accident_report_module.display_accident_report()  # Call the accident report module
+                st.markdown('</div>', unsafe_allow_html=True)
