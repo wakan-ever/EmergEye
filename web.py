@@ -37,7 +37,7 @@ if 'api_keys' not in st.session_state:
 
 ################## Home Page Section ##################
 if selected == "Home":
-    st.image("logo.png", width=200)
+    st.image("Logo.png", width=200)
     st.write("## **EmergEye** – Revolutionizing Emergency Response through Real-Time Traffic Monitoring")
     
     # Embed the video with custom width and height
