@@ -157,7 +157,11 @@ elif selected == "Our Product":
     with tabs[0]:
         st.header("MVP Diagram")
         st.write("This section will allow you to explore how our product works.")
+<<<<<<< HEAD
         st.image("diagram.png", width=1200)
+=======
+        st.image("diagram.png", width=1000)
+>>>>>>> 62dc05078c670133ed64feec527f4ca609387585
 
     with tabs[1]:         
         # Custom CSS for borders
@@ -209,8 +213,15 @@ elif selected == "Our Product":
         
             # Right Column: Accident Report Module
             with col_right:
+<<<<<<< HEAD
                 with st.container(height=1000, border=True):
                     st.markdown('<div class="module-container">', unsafe_allow_html=True)
                     st.markdown('<div class="module-title">Accident Notification</div>', unsafe_allow_html=True)
                     accident_report_module.display_accident_report()  # Call the accident report module
                     st.markdown('</div>', unsafe_allow_html=True)
+=======
+                st.markdown('<div class="module-container">', unsafe_allow_html=True)
+                st.markdown('<div class="module-title">Accident Notification</div>', unsafe_allow_html=True)
+                accident_report_module.display_accident_report()  # Call the accident report module
+                st.markdown('</div>', unsafe_allow_html=True)
+>>>>>>> 62dc05078c670133ed64feec527f4ca609387585
