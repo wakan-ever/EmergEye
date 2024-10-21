@@ -157,7 +157,7 @@ elif selected == "Our Product":
     with tabs[0]:
         st.header("MVP Diagram")
         st.write("This section will allow you to explore how our product works.")
-        st.image("diagram.png")
+        st.image("diagram.png", width=1000)
 
     with tabs[1]:         
         # Custom CSS for borders
