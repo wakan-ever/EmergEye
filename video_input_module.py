@@ -88,4 +88,4 @@ def display_video_input():
 
     # Handle case where the API key is missing
     else:
-        st.warning("Please submit the NYSDOT API Key first in the 'API Keys' section.")
+        st.warning("Please submit the NYSDoT API Key first in the 'API Keys' section.")
