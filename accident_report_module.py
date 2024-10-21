@@ -26,7 +26,7 @@ def display_accident_report():
         st.image(image, caption="Accident Image", use_column_width=True)
 
         # Display detailed accident report
-        st.subheader("Accident Report:")
+        st.subheader("Accident Report (demo):")
         st.markdown("""
         - **Location**: Intersection at Waterford Lakes, Orange County, FL
         - **Date and Time**: 2024-10-13 04:36:59

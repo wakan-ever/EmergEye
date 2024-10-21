@@ -38,7 +38,16 @@ if 'api_keys' not in st.session_state:
 if selected == "Home":
     st.title("EmergEye")
     st.write("--Reducing Emergency Response Time by Analyzing Real-Time Video")
-    st.video("https://www.youtube.com/watch?v=_vUcdeFFPQU")
+    # st.video("https://www.youtube.com/watch?v=_vUcdeFFPQU")
+    
+    # Embed the video with custom width and height
+    video_html = """
+    <iframe width="800" height="450" src="https://www.youtube.com/embed/_vUcdeFFPQU" 
+    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+    gyroscope; picture-in-picture" allowfullscreen></iframe>
+    """
+    st.markdown(video_html, unsafe_allow_html=True)
+    
     st.markdown("""
 The major issue in fatal traffic accident response is the delay caused by the dependence on witnesses or passersby to report accidents. Accidents often go unnoticed for critical minutes.
 
