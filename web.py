@@ -1,10 +1,9 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import pydeck as pdk
-
-import video_input_module  # Importing video input module
-import model_module        # Importing model module
-import accident_report_module  # Importing accident report module
+from modules import model_module
+from modules import video_input_module
+from modules import accident_report_module
 
 # Enable wide mode for full-screen layout
 st.set_page_config(layout="wide")
@@ -37,7 +36,7 @@ if 'api_keys' not in st.session_state:
 
 ################## Home Page Section ##################
 if selected == "Home":
-    st.image("Logo.png", width=200)
+    st.image("media/Logo.png", width=200)
     st.write("## **EmergEye** – Revolutionizing Emergency Response through Real-Time Traffic Monitoring")
     
     # Embed the video with custom width and height
@@ -71,7 +70,7 @@ elif selected == "About":
     **EmergEye** is the result of a collaborative effort by students in the Master of Information and Data Science (MIDS) program at the School of Information, UC Berkeley. Our team is united by a shared mission to harness technology in reducing emergency response times and improving road safety through real-time video analytics.
     """)
 
-    st.image("Team badge white.png", width=150, caption="Our Team")
+    st.image("media/Team badge white.png", width=150, caption="Our Team")
     
     st.markdown("""
     **Our Vision**  
@@ -157,7 +156,7 @@ elif selected == "Our Product":
     with tabs[0]:
         st.header("MVP Diagram")
         st.write("This section will allow you to explore how our product works.")
-        st.image("diagram.png", width=1000)
+        st.image("media/diagram.png", width=1000)
 
     with tabs[1]:         
         # Custom CSS for borders
@@ -194,14 +193,14 @@ elif selected == "Our Product":
             # Left Column: Video Input and Model Module
             with col_left:
                 # Top section: Video Input Module
-                with st.container(height=400, border=True):
+                with st.container(height=500, border=True):
                     # st.markdown('<div class="module-container">', unsafe_allow_html=True)
                     st.markdown('<div class="module-title">Live Stream Input</div>', unsafe_allow_html=True)
                     video_input_module.display_video_input()  # Call the video input module
                     st.markdown('</div>', unsafe_allow_html=True)
         
                 # Bottom section: Model Module
-                with st.container(height=450, border=True):
+                with st.container(height=350, border=True):
                     # st.markdown('<div class="module-container">', unsafe_allow_html=True)
                     st.markdown('<div class="module-title">Accident Detection (demo) </div>', unsafe_allow_html=True)
                     model_module.display_model_analysis()  # Call the model analysis module
@@ -211,6 +210,6 @@ elif selected == "Our Product":
             with col_right:
                 with st.container(height=865, border=True):
                     # st.markdown('<div class="module-container">', unsafe_allow_html=True)
-                    st.markdown('<div class="module-title">Accident Notification</div>', unsafe_allow_html=True)
+                    # st.markdown('<div class="module-title">Severe Accident Notification</div>', unsafe_allow_html=True)
                     accident_report_module.display_accident_report()  # Call the accident report module
                     st.markdown('</div>', unsafe_allow_html=True)
