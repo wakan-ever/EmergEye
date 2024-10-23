@@ -39,7 +39,6 @@ def generate_notification_from_csv(csv_path):
     """
     return message
 
-
 def display_accident_report():
     st.subheader("RESPONDER UI")
 
