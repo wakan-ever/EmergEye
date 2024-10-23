@@ -1,5 +1,6 @@
 import streamlit as st
 from modules.utils import StreamProcess
+import time
 
 def display_video_input():
     # Check if the NYSDOT API Key is available before proceeding
@@ -49,13 +50,12 @@ def display_video_input():
         with col2:
             if 'selected_camera' in st.session_state and st.session_state['selected_camera']:
                 selected_camera = st.session_state['selected_camera']
-                st.subheader("Selected Camera Details")
+                st.subheader("Camera Details")
                 st.write(f"**Camera ID:** {selected_camera.__dict__['id']}")
                 st.write(f"**Name:** {selected_camera.__dict__['name']}")
                 st.write(f"**Roadway:** {selected_camera.__dict__.get('roadway', 'Unknown')}")
                 st.write(f"**Direction:** {selected_camera.__dict__.get('direction', 'Unknown')}")
-                st.write(f"**Latitude:** {selected_camera.__dict__['latitude']}")
-                st.write(f"**Longitude:** {selected_camera.__dict__['longitude']}")
+                st.write(f"**Lat./Long.:** {selected_camera.__dict__['latitude']}, {selected_camera.__dict__['longitude']}")
                 # Placeholder for live camera image
                 image_placeholder = st.empty()
                 # Display the image from the Image URL
@@ -82,10 +82,23 @@ def display_video_input():
 
                 # Button to start video stream and save the video
                 if st.button("Start Video Stream and Save"):
-                    recording_info = stream_process.save_video_from_stream(duration_seconds=20)
+                    # recording_info = stream_process.save_video_from_stream(duration_seconds=20)
+                    recording_info = fake_save_video_stream(duration_seconds=10)  # for the demo purpose
                     st.write(recording_info)
-                    st.success("Frames extracted and Metadata saved")
+                    st.success("Frames extracted and Metadata saved (simulated)")
 
     # Handle case where the API key is missing
     else:
         st.warning("Please submit the NYSDoT API Key first in the 'API Keys' section.")
+
+# A fake function to simulate saving the video stream
+def fake_save_video_stream(duration_seconds=10):
+    # Simulate some time delay with a progress bar for the demo
+    progress_bar = st.progress(0)
+    
+    for i in range(100):
+        time.sleep(duration_seconds / 100)  # Simulate progress over the duration
+        progress_bar.progress(i + 1)
+    
+    # Simulate a successful operation after the delay
+    return " "

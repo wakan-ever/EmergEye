@@ -185,7 +185,7 @@ elif selected == "Our Product":
             st.session_state['notification_ready'] = False
 
         # Create a container for the entire UI
-        with st.container(height=900, border=True):
+        with st.container(height=1010, border=True):
             
             # Create two columns: one for the left (video input and model) and one for the right (accident report)
             col_left, col_right = st.columns([2, 1])  # Adjust ratio as needed
@@ -193,14 +193,14 @@ elif selected == "Our Product":
             # Left Column: Video Input and Model Module
             with col_left:
                 # Top section: Video Input Module
-                with st.container(height=500, border=True):
+                with st.container(height=580, border=True):
                     # st.markdown('<div class="module-container">', unsafe_allow_html=True)
                     st.markdown('<div class="module-title">Live Stream Input</div>', unsafe_allow_html=True)
                     video_input_module.display_video_input()  # Call the video input module
                     st.markdown('</div>', unsafe_allow_html=True)
         
                 # Bottom section: Model Module
-                with st.container(height=350, border=True):
+                with st.container(height=380, border=True):
                     # st.markdown('<div class="module-container">', unsafe_allow_html=True)
                     st.markdown('<div class="module-title">Accident Detection (demo) </div>', unsafe_allow_html=True)
                     model_module.display_model_analysis()  # Call the model analysis module
@@ -208,7 +208,7 @@ elif selected == "Our Product":
         
             # Right Column: Accident Report Module
             with col_right:
-                with st.container(height=865, border=True):
+                with st.container(height=975, border=True):
                     # st.markdown('<div class="module-container">', unsafe_allow_html=True)
                     # st.markdown('<div class="module-title">Severe Accident Notification</div>', unsafe_allow_html=True)
                     accident_report_module.display_accident_report()  # Call the accident report module
