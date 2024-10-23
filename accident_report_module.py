@@ -9,7 +9,7 @@ def display_accident_report():
     if st.session_state.get('notification_ready', False):
         # Simulate a push notification animation
         notification_placeholder = st.empty()
-        for i in range(3):
+        for i in range(5):
             notification_placeholder.info("New accident report incoming...")
             time.sleep(0.5)
             notification_placeholder.empty()
@@ -26,7 +26,7 @@ def display_accident_report():
         st.image(image, caption="Accident Image", use_column_width=True)
 
         # Display detailed accident report
-        st.subheader("Accident Report:")
+        st.subheader("Accident Report (demo):")
         st.markdown("""
         - **Location**: Intersection at Waterford Lakes, Orange County, FL
         - **Date and Time**: 2024-10-13 04:36:59
