@@ -16,8 +16,6 @@ cache_directory = "capstone-cache/"
 video_recording_output_path = "./temp/"
 if not os.path.exists(video_recording_output_path):
     os.makedirs(video_recording_output_path)
-aws_access_key_id = st.secrets["AWS_ACCESS_KEY_ID"]
-aws_secret_access_key = st.secrets["AWS_SECRET_ACCESS_KEY"]
 
 
 class StreamProcess:
@@ -27,10 +25,7 @@ class StreamProcess:
         """
         self.local_timezone = pytz.timezone(local_timezone)
         self.api = API(api_key)
-        self.s3_client = boto3.client("s3",
-                                      aws_access_key_id=aws_access_key_id,
-                                      aws_secret_access_key=aws_secret_access_key,
-                                     )
+        self.s3_client = boto3.client("s3")
         self.selected_camera = None
 
     def search_camera_by_road(self, road_name):
