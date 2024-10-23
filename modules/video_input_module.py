@@ -86,6 +86,14 @@ def display_video_input():
                     recording_info = fake_save_video_stream(duration_seconds=10)  # for the demo purpose
                     st.write(recording_info)
                     st.success("Frames extracted and Metadata saved (simulated)")
+                    
+                # Button to start accident monitoring
+                if st.button("Start Accident Monitoring"):
+                    st.write("Accident monitoring started.")
+                
+                # Button to stop accident monitoring
+                if st.button("Stop Accident Monitoring"):
+                    st.write("Accident monitoring stopped.")
 
     # Handle case where the API key is missing
     else:

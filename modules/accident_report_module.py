@@ -40,7 +40,7 @@ def display_accident_report():
 
     # Show the "Fetch Detailed Report" button only after fetching the brief notification
     if st.session_state['brief_fetched']:
-        if st.button("Fetch Detailed Report"):
+        if st.button("Fetch Detailed Report (under development)"):
             # Display detailed accident report
             st.subheader("Accident Report (demo):")
             st.markdown("""
